@@ -1,7 +1,12 @@
-from liangs_algorithm import start_liangs_algorithm
+import liangs_algorithm
+import http_client
 
-selectedAlg = input('Hello. Please select an algorithm you would like to preview\n 1.: Liang\'s algorithm\n')
+selectedAlg = input('Hello. Please select an algorithm you would like to preview\n'
+                    ' 1.: Liang\'s algorithm\n'
+                    ' 2.: HttpClient\n')
 
 if int(selectedAlg) == 1:
-    start_liangs_algorithm()
+    liangs_algorithm.start_liangs_algorithm()
+elif int(selectedAlg) == 2:
+    http_client.getAddress()
 

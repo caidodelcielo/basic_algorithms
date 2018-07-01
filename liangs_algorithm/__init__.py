@@ -1,10 +1,11 @@
-import re
-
 def start_liangs_algorithm():
-    with open('liang_pattern.txt') as f:
+    processWords()
+
+def processWords():
+    with open('liangs_algorithm/liang_pattern.txt') as f:
         patterns = [word for line in f for word in line.split()]
 
-    with open('liang_word_list.txt') as f1:
+    with open('liangs_algorithm/liang_word_list.txt') as f1:
         words = [word for line in f1 for word in line.split()]
 
     for word in words:
