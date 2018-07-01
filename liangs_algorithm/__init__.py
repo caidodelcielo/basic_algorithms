@@ -68,8 +68,7 @@ def processWords():
 
         print(''.join([str(x) for x in finalWord]))
 
-
-    print('finished')
+    print('Finished')
 
 
 def is_odd(num):
