@@ -1,7 +1,8 @@
 def start_liangs_algorithm():
-    processWords()
+    process_words()
 
-def processWords():
+
+def process_words():
     with open('liangs_algorithm/liang_pattern.txt') as f:
         patterns = [word for line in f for word in line.split()]
 
@@ -9,64 +10,64 @@ def processWords():
         words = [word for line in f1 for word in line.split()]
 
     for word in words:
-        finalDict = {}
+        final_dict = {}
 
         for pattern in patterns:
-            patternWithout = ''.join(c for c in pattern if not c.isdigit())
-            patternDotIndex = patternWithout.find('.')
-            patternWithoutDot = patternWithout.replace('.', '')
-            patternWithNumWithoutDot = pattern.replace('.', '')
-            foundIndex = False
+            pattern_without = ''.join(c for c in pattern if not c.isdigit())
+            pattern_dot_index = pattern_without.find('.')
+            pattern_without_dot = pattern_without.replace('.', '')
+            pattern_with_num_without_dot = pattern.replace('.', '')
+            found_index = False
 
-            if patternDotIndex != -1:
-                if patternDotIndex == 0:
-                    foundIndex = word.startswith(patternWithoutDot)
+            if pattern_dot_index != -1:
+                if pattern_dot_index == 0:
+                    found_index = word.startswith(pattern_without_dot)
                 else:
-                    foundIndex = word.endswith(patternWithoutDot)
+                    found_index = word.endswith(pattern_without_dot)
             else:
-                found = word.find(patternWithoutDot)
+                found = word.find(pattern_without_dot)
                 if found != -1:
-                    foundIndex = True
+                    found_index = True
 
-            if foundIndex:
-                patternIndex = word.find(patternWithoutDot)
+            if found_index:
+                pattern_index = word.find(pattern_without_dot)
 
-                for idx, letter in enumerate(patternWithNumWithoutDot):
+                for idx, letter in enumerate(pattern_with_num_without_dot):
                     if letter.isdigit():
-                        indexToAdd = 0
-                        numbersToAdd = ''
+                        index_to_add = 0
+                        numbers_to_add = ''
 
-                        if patternWithNumWithoutDot.startswith(letter):
-                            indexToAdd = patternIndex-1
-                            numbersToAdd = letter
-                            #print(patternWithNumWithoutDot)
-                        elif patternWithNumWithoutDot.endswith(letter):
-                            indexToAdd = patternIndex + len(patternWithoutDot) - 1
-                            numbersToAdd = letter
-                            #print(patternWithNumWithoutDot)
+                        if pattern_with_num_without_dot.startswith(letter):
+                            index_to_add = pattern_index-1
+                            numbers_to_add = letter
+                            # print(pattern_with_num_without_dot)
+                        elif pattern_with_num_without_dot.endswith(letter):
+                            index_to_add = pattern_index + len(pattern_without_dot) - 1
+                            numbers_to_add = letter
+                            # print(pattern_with_num_without_dot)
                         else:
-                            searchString = patternWithNumWithoutDot[idx-1] + patternWithNumWithoutDot[idx+1]
-                            searchStringIndex = word.find(searchString, patternIndex)
-                            indexToAdd = searchStringIndex
-                            numbersToAdd = letter
-                            #print(patternWithNumWithoutDot)
+                            search_string = pattern_with_num_without_dot[idx-1] + pattern_with_num_without_dot[idx+1]
+                            search_string_index = word.find(search_string, pattern_index)
+                            index_to_add = search_string_index
+                            numbers_to_add = letter
+                            # print(pattern_with_num_without_dot)
 
-                        if (str(indexToAdd) in finalDict):
-                            if (finalDict[str(indexToAdd)] < int(numbersToAdd)):
-                                finalDict[str(indexToAdd)] = int(numbersToAdd)
+                        if str(index_to_add) in final_dict:
+                            if final_dict[str(index_to_add)] < int(numbers_to_add):
+                                final_dict[str(index_to_add)] = int(numbers_to_add)
                         else:
-                            finalDict[str(indexToAdd)] = int(numbersToAdd)
+                            final_dict[str(index_to_add)] = int(numbers_to_add)
 
-        #print(finalDict)
+        # print(final_dict)
 
-        finalWord = []
+        final_word = []
         for idx, value in enumerate(word):
-            finalWord.append(value)
-            if (str(idx) in finalDict):
-                if (is_odd(finalDict[str(idx)])):
-                    finalWord.append('-')
+            final_word.append(value)
+            if str(idx) in final_dict:
+                if is_odd(final_dict[str(idx)]):
+                    final_word.append('-')
 
-        print(''.join([str(x) for x in finalWord]))
+        print(''.join([str(x) for x in final_word]))
 
     print('Finished')
 
